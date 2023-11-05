@@ -15,8 +15,13 @@ def SignUp(request):
         if request.POST['password1'] == request.POST['password2']:
             # Registrar usuario
             # Creamos un objeto el create_user espera como parametro el username y password del formulario
-            user = User.objects.create_user(request.POST['username'],request.POST['password1'])
-            user.save() # Lo almacenamos en un formulario y lo guardamos
+            try:
+                user = User.objects.create_user(request.POST['username'],request.POST['password1'])
+                user.save() # Lo almacenamos en un formulario y lo guardamos
+            except:
+                return HttpResponse('El usuario ya existe')
+            
+            return HttpResponse('User correctamente creado')
         else:
             return HttpResponse('Las contraseñas no coinciden')
     
