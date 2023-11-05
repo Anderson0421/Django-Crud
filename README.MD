@@ -1,3 +1,3 @@
 # Django CRUD
--- AnderDev2024
-* Aplicacion de tareas de Django
+* Aplicacion de tareas con Django
+* AnderDev2024
