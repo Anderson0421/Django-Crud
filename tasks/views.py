@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.forms import UserCreationForm  #Con esto creamos un formulario de registro
 
-def helloWorld(request):
+def SignUp(request):
     context={
         'form':UserCreationForm()
     }

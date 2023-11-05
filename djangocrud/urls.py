@@ -4,6 +4,6 @@ from tasks.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',helloWorld),
-    path('signup/',helloWorld),
+    path('',SignUp),
+    path('signup/',SignUp),
 ]
