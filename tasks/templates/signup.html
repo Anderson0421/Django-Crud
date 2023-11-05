@@ -6,6 +6,7 @@
 </head>
 <body>
     <form action="/signup/" method="POST">
+        {{error}}
         {% csrf_token %}
         {{form.as_p}}
         <button type='submit'>
