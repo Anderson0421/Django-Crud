@@ -1,8 +1,9 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
-from django.contrib.auth.forms import UserCreationForm  #Con esto creamos un formulario de registro
+from django.contrib.auth.forms import UserCreationForm #Con esto creamos un formulario de registro
 from django.contrib.auth.models import User #Aqui sera donde guardaremos nuestro usuarios en este modelo
-
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login
 def Home(request):
     return render(request,'home.html')
 
@@ -19,7 +20,8 @@ def SignUp(request):
             try:
                 user = User.objects.create_user(username=request.POST['username'],password=request.POST['password1'])
                 user.save() # Lo almacenamos en un formulario y lo guardamos
-                return HttpResponse('User correctamente creado')
+                login(request,user)
+                return redirect('/task')
             except:
                 return render(request,'signup.html',{
                     'form':UserCreationForm(),
@@ -29,5 +31,8 @@ def SignUp(request):
                     'form':UserCreationForm(),
                     'error':"Las contrasenas no coinciden"
                 })    
-    return render(request,'signup.html',{'form':UserCreationForm()})
 
+
+@login_required(login_url='/signup/')
+def Tasks(request):
+    return render(request,'task.html')
